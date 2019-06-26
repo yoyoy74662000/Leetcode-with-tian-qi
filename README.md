@@ -1,4 +1,2 @@
-# Leetcode
-Start to doing the Leetcode
-我给你删掉
-test
+LeetCode
+One Question Per Day (Daniel and Joel)

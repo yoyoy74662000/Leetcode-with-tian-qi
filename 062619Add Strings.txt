@@ -1,4 +1,4 @@
-655. Add Strings
+﻿655. Add Strings
 中文English
 Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
 
@@ -12,6 +12,27 @@ The length of both num1 and num2 is < 5100.
 Both num1 and num2 contains only digits 0-9.
 Both num1 and num2 does not contain any leading zero.
 You must not use any built-in BigInteger library or convert the inputs to integer directly.
+//Daniel's Code
+public class Solution {
+	public String addStrings(String num1, String num2) {
+		//遇到string 問題，就要想到指針還有stringbuilder
+		int len1 = num1.length()-1;
+		int len2 = num2.length()-1;
+		int sum = 0;
+		StringBuilder sb = new StringBuilder();
+		while(len1 >= 0 || len2 >= 0){
+			//這裡就是雙指針
+			sum += len1 >= 0 ? num1.charAt(len1--) - '0' : 0;
+			sum += len2 >= 0 ? num2.charAt(len2--) - '0' : 0;
+			sb.append(sum % 10);
+			sum = sum / 10;
+		}
+		if (sum != 0) {
+            sb.append(sum);
+        }
+        return sb.reverse().toString();
+	}
+}
 
 //Joel's Code
 public class Solution {

@@ -49,6 +49,8 @@ public class Solution {
      * @param headB: the second list
      * @return: a ListNode
      */
+	 
+	//Add the headA pointer to the set, and iterate headB to see if any pointer inside set then return
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<>();
         while (headA != null) {

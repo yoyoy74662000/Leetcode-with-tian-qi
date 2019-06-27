@@ -30,7 +30,7 @@ The linked lists must retain their original structure after the function returns
 You may assume there are no cycles anywhere in the entire linked structure.
 
 
-
+//Joel's Code
 /**
  * Definition for ListNode
  * public class ListNode {
@@ -49,7 +49,22 @@ public class Solution {
      * @param headB: the second list
      * @return: a ListNode
      */
+	 
+	//Add the headA pointer to the set, and iterate headB to see if any pointer inside set then return
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        // write your code here
+        Set<ListNode> set = new HashSet<>();
+        while (headA != null) {
+           set.add(headA);
+           headA = headA.next;
+        }
+
+        while (headB != null) {
+           if (set.contains(headB)) {
+              return headB;
+           }
+           headB = headB.next;
+        }
+
+        return null;
     }
 }

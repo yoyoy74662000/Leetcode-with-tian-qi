@@ -1,0 +1,68 @@
+655. Add Strings
+中文English
+Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+
+Example
+Example 1:
+
+Input : num1 = "123", num2 = "45"
+Output : "168"
+Notice
+The length of both num1 and num2 is < 5100.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+//Joel's Code
+public class Solution {
+    /**
+     * @param num1: a non-negative integers
+     * @param num2: a non-negative integers
+     * @return: return sum of num1 and num2
+     */
+    public String addStrings(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+		int carryOn = 0;
+		int length1 = num1.length() - 1;
+		int length2 = num2.length() - 1;
+		while (length1 >= 0 && length2 >= 0) {
+		    int temp = num1.charAt(length1) - '0'+ num2.charAt(length2) - '0' + carryOn;
+			if (temp / 10 > 0) {
+			   carryOn = temp / 10;
+			} else {
+			   carryOn = 0;
+			}
+			sb.append(String.valueOf(temp % 10));
+			length1--;
+			length2--;
+		}
+		
+		while (length1 >= 0) {
+		    int temp = num1.charAt(length1) - '0' + carryOn;
+			if (temp / 10 > 0) {
+			   carryOn = temp / 10;
+			} else {
+			   carryOn = 0;
+			}
+			sb.append(String.valueOf(temp % 10));
+			length1--;
+		}
+		
+		while (length2 >= 0) {
+		    int temp = num2.charAt(length2) - '0' + carryOn;
+			if (temp / 10 > 0) {
+			   carryOn = temp / 10;
+			} else {
+			   carryOn = 0;
+			}
+			sb.append(String.valueOf(temp % 10));
+			length2--;
+		}
+		
+		if (carryOn > 0) {
+		   sb.append(String.valueOf(carryOn));
+		}
+		
+		return sb.reverse().toString();
+    }
+}

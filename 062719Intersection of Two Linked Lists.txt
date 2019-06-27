@@ -28,7 +28,28 @@ Notice
 If the two linked lists have no intersection at all, return null.
 The linked lists must retain their original structure after the function returns.
 You may assume there are no cycles anywhere in the entire linked structure.
+// Daniel's code
+//一招打天下 雙只針
+//這題有印象就是 when node == null 就會跳到對方的node
 
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+	//指針的建立
+        ListNode p = headA, q = headB;
+//當兩個指針沒有碰頭，有碰頭就交換
+        while(p != q){
+            if(p == null){
+                p = headB;
+            }else{
+                p = p.next;
+            }
+            if(q == null){
+                q = headA;
+            }else{
+                q = q.next;
+            }
+        }
+        return p;
+    }
 
 //Joel's Code
 /**

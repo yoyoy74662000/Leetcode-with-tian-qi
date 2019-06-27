@@ -22,8 +22,12 @@ public class Solution {
 		StringBuilder sb = new StringBuilder();
 		while(len1 >= 0 || len2 >= 0){
 			//這裡就是雙指針
-			sum += len1 >= 0 ? num1.charAt(len1--) - '0' : 0;
-			sum += len2 >= 0 ? num2.charAt(len2--) - '0' : 0;
+			if(len1 >= 0){
+                		sum = sum + num1.charAt(len1--) - '0';
+            		}
+            		if(len2 >= 0){
+                		sum = sum + num2.charAt(len2--) - '0';
+            		}
 			sb.append(sum % 10);
 			sum = sum / 10;
 		}

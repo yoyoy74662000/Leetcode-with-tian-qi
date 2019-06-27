@@ -46,6 +46,8 @@ public class Solution {
 		int carryOn = 0;
 		int length1 = num1.length() - 1;
 		int length2 = num2.length() - 1;
+		
+		//全部都是大于0的情况
 		while (length1 >= 0 && length2 >= 0) {
 		    int temp = num1.charAt(length1) - '0'+ num2.charAt(length2) - '0' + carryOn;
 			if (temp / 10 > 0) {
@@ -58,6 +60,7 @@ public class Solution {
 			length2--;
 		}
 		
+		//假设num1比较长
 		while (length1 >= 0) {
 		    int temp = num1.charAt(length1) - '0' + carryOn;
 			if (temp / 10 > 0) {
@@ -69,6 +72,7 @@ public class Solution {
 			length1--;
 		}
 		
+		//假设num2比较长
 		while (length2 >= 0) {
 		    int temp = num2.charAt(length2) - '0' + carryOn;
 			if (temp / 10 > 0) {
@@ -80,6 +84,7 @@ public class Solution {
 			length2--;
 		}
 		
+		//考虑额外的数字
 		if (carryOn > 0) {
 		   sb.append(String.valueOf(carryOn));
 		}

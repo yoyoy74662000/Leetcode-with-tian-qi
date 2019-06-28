@@ -20,6 +20,41 @@ Output: -1.
 Challenge
 O(logN) time
 
+//Daniel's code
+// 因為是要 O(logN)，所以必須要用 binary search
+
+public int search(int[] A, int target) {
+        if (A == null || A.length == 0) {
+            return -1;
+        }
+        int lo = 0;
+        int hi = A.length - 1;
+        while (lo < hi) {
+        //先找出中間值
+            int mid = (lo + hi) / 2;
+            if (A[mid] == target) return mid;
+            if (A[lo] <= A[mid]) {
+            //中間往左
+                if (target >= A[lo] && target < A[mid]) {
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 1;
+                }
+            } else {
+            //中間往右
+                if (target > A[mid] && target <= A[hi]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            }
+        }
+        if(A[lo] == target){
+            return lo;
+        }else{
+            return -1;
+        }
+   }
 
 public class Solution {
     /**

@@ -47,8 +47,57 @@ Output:
 Notice
 The height of binary tree is in the range of [1, 10].
 
+Daniel's Code
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ 
+class Solution {
+    public List<List<String>> printTree(TreeNode root) {
+        int high = high(root);
+        int wide = (int) Math.pow(2, high) - 1;
+        List<List<String>> result = new ArrayList<>();
+        // 這時候要遍歷深度和廣度，所以需要兩個for loop
+        for(int i = 0; i < high; i++){
+        	//每一次的for loop都要是新的，所以在這裡加
+        	List<String> list = new ArrayList<>();
+        	for(int j = 0; j < wide; j++){
+        		list.add("");
+        	}
+        	result.add(list);
+        }
+        print(result, root, 0, 0, wide -1);
+        return result;
+    }
+
+    public void print(List<List<String>> result, TreeNode root, int row, int left, int right){
+    	//這裡就是應用到 binary search 由中間分兩部分 --> 這裡可以延伸很多題目
+    	if(root == null) return;
+    	int center = (left + right) / 2;
+    	result.get(row).set(center, String.valueOf(root.val));
+    	//這裡就是recursive 分兩部分
+    	print(result, root.left, row + 1, left, center);
+    	print(result, root.right, row + 1, center + 1, right);
+    }
+    private int high(TreeNode node) {
+        if (node == null) return 0;
+        return 1 + Math.max(high(node.left), high(node.right));
+    }
+}
 
 
+
+
+---------------------------------------------------------------------------------------------
+
+Joel's Code
 /**
  * Definition of TreeNode:
  * public class TreeNode {

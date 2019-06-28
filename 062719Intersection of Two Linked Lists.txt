@@ -1,0 +1,91 @@
+380. Intersection of Two Linked Lists
+??English
+Write a program to find the node at which the intersection of two singly linked lists begins.
+
+Example
+Example 1:
+
+Input:
+	A:          a1 ? a2
+	                   ?
+	                     c1 ? c2 ? c3
+	                   ?            
+	B:     b1 ? b2 ? b3
+Output: c1
+Explanation :begin to intersect at node c1.
+Example 2:
+
+Input:
+Intersected at 6
+1->2->3->4->5->6->7->8->9->10->11->12->13->null
+6->7->8->9->10->11->12->13->null
+Output: Intersected at 6
+Explanation:begin to intersect at node 6.
+Challenge
+Your code should preferably run in O(n) time and use only O(1) memory.
+
+Notice
+If the two linked lists have no intersection at all, return null.
+The linked lists must retain their original structure after the function returns.
+You may assume there are no cycles anywhere in the entire linked structure.
+// Daniel's code
+//一招打天下 雙只針
+//這題有印象就是 when node == null 就會跳到對方的node
+
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+	//指針的建立
+        ListNode p = headA, q = headB;
+//當兩個指針沒有碰頭，有碰頭就交換
+        while(p != q){
+            if(p == null){
+                p = headB;
+            }else{
+                p = p.next;
+            }
+            if(q == null){
+                q = headA;
+            }else{
+                q = q.next;
+            }
+        }
+        return p;
+    }
+
+//Joel's Code
+/**
+ * Definition for ListNode
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param headA: the first list
+     * @param headB: the second list
+     * @return: a ListNode
+     */
+	 
+	//Add the headA pointer to the set, and iterate headB to see if any pointer inside set then return
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        Set<ListNode> set = new HashSet<>();
+        while (headA != null) {
+           set.add(headA);
+           headA = headA.next;
+        }
+
+        while (headB != null) {
+           if (set.contains(headB)) {
+              return headB;
+           }
+           headB = headB.next;
+        }
+
+        return null;
+    }
+}

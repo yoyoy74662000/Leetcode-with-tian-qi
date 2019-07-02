@@ -21,6 +21,31 @@ class Solution {
 // Joe's code
 class Solution {
     public List<String> generateParenthesis(int n) {
-        
+        List<String> result = new ArrayList<>();
+        int left = 0;
+        int right = 0;
+        StringBuilder sb = new StringBuilder();
+        helper(result, n, left, right, sb);
+        return result;
+    }
+
+    private void helper(List<String> result, int n, int left, int right, StringBuilder sb) {
+    //整个返回的情况
+        if (left == n && right == n) {
+            result.add(sb.toString());
+            return;
+        }
+    //如果left小于括号数
+        if (left < n) {
+            sb.append("(");
+            helper(result, n, left + 1, right, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    //如果left大于right
+        if (left > right) {
+            sb.append(")");
+            helper(result, n, left, right + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
     }
 }

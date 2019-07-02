@@ -12,9 +12,28 @@ For example, given n = 3, a solution set is:
 ]
 
 // Daniel's code
+//這題考了 DFS 還有 recursion
 class Solution {
     public List<String> generateParenthesis(int n) {
+      List<String> res = new ArrayList<>();
+      helper("", res, n, n);
+      return res;
+    }
+    
+    public void helper(String prefix, List<String> res, int left, int right){
+      if(left == 0 && right == 0){
+        res.add(prefix);
+        return;
+      }
+      if(left > right) return;
         
+      if(left > 0){
+        helper(prefix + '(', res, left - 1, right);
+        //recursive完，會到下一個
+      }
+      if(right > 0){
+        helper(prefix + ')', res, left, right - 1);
+      }
     }
 }
 

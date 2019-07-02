@@ -26,13 +26,46 @@ public class Solution {
 }
 
 
-//Joel's Code
+//Joel's Code    需要重写，因为空间复杂度太多
 public class Solution {
     /**
      * @param str: A string
      * @return: all permutations
      */
     public List<String> stringPermutation2(String str) {
-        // write your code here
+        List<String> result = new ArrayList<>();
+        if (str.equals("")) {
+            result.add(str);
+            return result;
+        }
+        
+        char[] temp = str.toCharArray();
+        Arrays.sort(temp);
+        Set<String> set = new HashSet<>();
+        permutation(String.valueOf(temp), 0, set);
+        return new ArrayList<String>(set);
+    }
+
+    private void permutation(String str, int index, Set<String> set) {
+        if (index == str.length() - 1 && !set.contains(str)) {
+            set.add(str);
+            return;
+        }
+
+        for (int i = index; i < str.length(); i++) {
+            str = swap(str, i, index);
+            permutation(str, index + 1, set);
+            str = swap(str, i, index);
+        }
+    }
+
+
+    //Notice the string in immutable so we need to return the String
+    private String swap(String str, int index1, int index2) {
+        char[] characters = str.toCharArray();
+        char temp = characters[index1];
+        characters[index1] = characters[index2];
+        characters[index2] = temp;
+        return String.valueOf(characters);
     }
 }

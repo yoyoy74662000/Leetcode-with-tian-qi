@@ -92,13 +92,11 @@ public class Solution {
 		Stack<Pair> stack = new Stack<>();
 		for (String s : logs) {
 		   String[] input = s.split(":");
-		   if (input[1].equals("start") && stack.isEmpty()) {
+		   if (input[1].equals("start")) {
+		      if (!stack.isEmpty()) {
+			      result[stack.peek().i] += Integer.valueOf(input[2]) - stack.peek().time;
+			  }
 		      stack.push(new Pair(Integer.valueOf(input[0]), Integer.valueOf(input[2])));
-		      System.out.println(Integer.valueOf(input[0]));
-		   }
-		   else if (input[1].equals("start") && !stack.isEmpty()) {
-		      result[stack.peek().i] += Integer.valueOf(input[2]) - stack.peek().time;
-			  stack.push(new Pair(Integer.valueOf(input[0]), Integer.valueOf(input[2])));
 		   }
 		   else if (input[1].equals("end")) {
 		      Pair pair = stack.pop();

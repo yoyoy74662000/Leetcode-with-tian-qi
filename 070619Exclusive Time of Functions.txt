@@ -93,16 +93,19 @@ public class Solution {
 		for (String s : logs) {
 		   String[] input = s.split(":");
 		   if (input[1].equals("start")) {
+		   //如果不是empty就要对应加上它的面积
 		      if (!stack.isEmpty()) {
 			      result[stack.peek().i] += Integer.valueOf(input[2]) - stack.peek().time;
 			  }
 		      stack.push(new Pair(Integer.valueOf(input[0]), Integer.valueOf(input[2])));
 		   }
 		   else if (input[1].equals("end")) {
+		   //pop出之前的对称的i
 		      Pair pair = stack.pop();
 		      result[pair.i] += Integer.valueOf(input[2]) - pair.time + 1;
 			  System.out.println(pair.time);
 			  if (!stack.isEmpty()) {
+			  //update peek的结束时间，方便下面的循环
 			     stack.peek().time = Integer.valueOf(input[2]) + 1;
 			  }
 		   }

@@ -40,6 +40,8 @@ public class Solution {
 		    return 0;
 		}
 		
+		
+		//用一个maxHeightLelt记录到i为止，左边最高点
 		int[] maxHeightLeft = new int[heights.length + 1];
 	    maxHeightLeft[0] = 0;
 		
@@ -48,9 +50,12 @@ public class Solution {
 		}
 		
 		int area = 0;
+		
+		//记录右边最高点
 		int maxHeightRight = 0;
 		
 		for (int i = heights.length - 1; i >= 0; i--) {
+		//如果左右边最低点的高度大于height【i】代表有水在里面
 			int temp = Math.min(maxHeightRight, maxHeightLeft[i]) - heights[i];
 			area = area + (temp > 0 ? temp : 0);
 			maxHeightRight = Math.max(maxHeightRight, heights[i]);

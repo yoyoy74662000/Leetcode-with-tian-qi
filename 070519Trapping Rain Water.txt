@@ -29,13 +29,33 @@ public class Solution {
     }
 }
 
-
+//Joel
 public class Solution {
     /**
      * @param heights: a list of integers
      * @return: a integer
      */
     public int trapRainWater(int[] heights) {
-
+        if (heights == null || heights.length == 0) {
+		    return 0;
+		}
+		
+		int[] maxHeightLeft = new int[heights.length + 1];
+	    maxHeightLeft[0] = 0;
+		
+		for (int i = 0; i < heights.length; i++) {
+		    maxHeightLeft[i + 1] = Math.max(maxHeightLeft[i], heights[i]);
+		}
+		
+		int area = 0;
+		int maxHeightRight = 0;
+		
+		for (int i = heights.length - 1; i >= 0; i--) {
+			int temp = Math.min(maxHeightRight, maxHeightLeft[i]) - heights[i];
+			area = area + (temp > 0 ? temp : 0);
+			maxHeightRight = Math.max(maxHeightRight, heights[i]);
+		}
+		
+		return area;
     }
 }

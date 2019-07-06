@@ -1,0 +1,79 @@
+426. Restore IP Addresses
+中文English
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+(Your task is to add three dots to this string to make it a valid IP address. Return all possible IP address.)
+
+Example
+Example 1:
+
+Input: "25525511135"
+Output: ["255.255.11.135", "255.255.111.35"]
+Explanation: ["255.255.111.35", "255.255.11.135"] will be accepted as well.
+Example 2:
+
+Input: "1116512311"
+Output: ["11.165.123.11","111.65.123.11"]
+Notice
+You can return all valid IP address in any order.
+
+//Daniel's Code
+public class Solution {
+    /**
+     * @param s: the IP string
+     * @return: All possible valid IP addresses
+     */
+    public List<String> restoreIpAddresses(String s) {
+
+    }
+}
+
+//Joel's Code
+public class Solution {
+    /**
+     * @param s: the IP string
+     * @return: All possible valid IP addresses
+     */
+    public List<String> restoreIpAddresses(String s) {
+        List<String> result = new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
+		int count = 0;
+		helper(s, sb, 0, result, count);
+		return result;
+    }
+	
+	
+	private void helper(String s, StringBuilder sb, int index, List<String> result, int count) {
+	    if (sb.length() == s.length() + 3 && count == 4) {
+		    result.add(sb.toString());
+		    return;
+		}
+		
+		if (count == 4 || sb.length() >= s.length() + 3 ) {
+		   return;
+		}
+		
+		
+		//利用dfs的便利找出所有的可能，并且搞出只有这种可能的
+		for (int i = 1; i <= 3; i++) {
+		    int tempIndex = index + i;
+			if (tempIndex <= s.length()) {
+			    String temp = s.substring(index, tempIndex);
+				//这步我真的不明白，看了答案照着写
+				int number = temp.charAt(0) == '0' ? 0 : Integer.valueOf(temp);
+				//确定范围
+				if (number >= 0 && number <= 255) {
+					sb.append(count != 0 ? "." : "");
+					sb.append(number);
+					helper(s, sb, tempIndex, result, count + 1);
+					//backtracking
+					if (count == 0) {
+    					sb.delete(0, sb.length());
+    				} else {
+    					sb.delete(sb.lastIndexOf("."), sb.length());
+    				}
+				}
+			}
+		}
+	}
+}

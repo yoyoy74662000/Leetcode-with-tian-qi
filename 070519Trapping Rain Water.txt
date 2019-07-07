@@ -18,7 +18,7 @@ O(n) time and O(1) memory
 
 O(n) time and O(n) memory is also acceptable.
 
-
+// Daniel's code
 public class Solution {
     /**
      * @param heights: a list of integers

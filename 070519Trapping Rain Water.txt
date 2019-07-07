@@ -25,7 +25,7 @@ public class Solution {
      * @return: a integer
      */
     public int trapRainWater(int[] heights) {
-        int maxHeights = new int[heights.length + 1];
+        
     }
 }
 

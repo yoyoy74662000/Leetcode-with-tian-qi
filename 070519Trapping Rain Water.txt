@@ -24,8 +24,28 @@ public class Solution {
      * @param heights: a list of integers
      * @return: a integer
      */
+    //這是在考智力測驗吧
     public int trapRainWater(int[] heights) {
-        
+        if (heights == null || heights.length == 0) {
+            return 0;
+        }
+        int left = 0;
+        int right = heights.length - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int res = 0;
+        while (left < right) {
+            if (leftMax < rightMax) {
+	    	leftMax = Math.max(leftMax, heights[left]);
+                res += leftMax - heights(left);
+                left++;
+            } else {
+	    	rightMax = Math.max(rightMax, heights[right]);
+                res += rightMax - heights(right);
+                right--;
+            }
+        }
+        return res;
     }
 }
 
